@@ -40,9 +40,7 @@ body::before {
     width: 100%;
     height: 100%;
     background: 
-        radial-gradient(circle at 20% 80%, rgba(167, 139, 250, 0.12) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(251, 113, 133, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(52, 211, 153, 0.08) 0%, transparent 50%);
+        url("https://media.cnn.com/api/v1/images/stellar/prod/230527051429-03-magnus-carlsen-superbet-rapid-blitz-2023.jpg?c=16x9&q=h_833,w_1480,c_fill") center/cover fixed;
     pointer-events: none;
     z-index: -1;
     animation: bgPulse 12s ease-in-out infinite;
