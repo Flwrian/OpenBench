@@ -1,21 +1,26 @@
 .w-25 {
     width: 25%;
+    transition: width 0.3s ease;
 }
 
 .w-21 {
     width: 21%;
+    transition: width 0.3s ease;
 }
 
 .w-50 {
     width: 50%;
+    transition: width 0.3s ease;
 }
 
 .w-75 {
     width: 75%;
+    transition: width 0.3s ease;
 }
 
 .w-100 {
     width: 100%;
+    transition: width 0.3s ease;
 }
 
 .mw-25 {

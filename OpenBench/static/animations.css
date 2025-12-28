@@ -1,0 +1,256 @@
+/* ========================================
+   ANIMATIONS STYLÉES POUR OPENBENCH
+   ======================================== */
+
+/* Animation de chargement pour les éléments */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Effet de particules en arrière-plan */
+@keyframes particles {
+    0% {
+        transform: translateY(0) translateX(0) scale(1);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) translateX(50px) scale(0);
+        opacity: 0;
+    }
+}
+
+/* Appliquer les animations aux éléments */
+#content table {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+#sidebar li {
+    animation: slideInLeft 0.5s ease-out;
+    animation-fill-mode: both;
+}
+
+#sidebar li:nth-child(1) { animation-delay: 0.05s; }
+#sidebar li:nth-child(2) { animation-delay: 0.1s; }
+#sidebar li:nth-child(3) { animation-delay: 0.15s; }
+#sidebar li:nth-child(4) { animation-delay: 0.2s; }
+#sidebar li:nth-child(5) { animation-delay: 0.25s; }
+#sidebar li:nth-child(6) { animation-delay: 0.3s; }
+#sidebar li:nth-child(7) { animation-delay: 0.35s; }
+#sidebar li:nth-child(8) { animation-delay: 0.4s; }
+#sidebar li:nth-child(9) { animation-delay: 0.45s; }
+#sidebar li:nth-child(10) { animation-delay: 0.5s; }
+
+/* Effet de brillance sur les boutons */
+.anchorbutton {
+    background-size: 200% auto;
+    position: relative;
+}
+
+.anchorbutton::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.anchorbutton:hover::after {
+    left: 100%;
+}
+
+/* Effet de pulsation sur les éléments importants */
+.statblock-green,
+.statblock-blue {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Scrollbar personnalisée */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(15, 15, 35, 0.5);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #00d9ff, #51cf66);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #51cf66, #00d9ff);
+    box-shadow: 0 0 15px rgba(0, 217, 255, 0.8);
+}
+
+/* Effet de lueur sur les éléments au focus */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--color-font3);
+    box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.3),
+                0 0 20px rgba(0, 217, 255, 0.2);
+}
+
+/* Particules décoratives */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background-image: 
+        radial-gradient(circle, rgba(0, 217, 255, 0.3) 1px, transparent 1px),
+        radial-gradient(circle, rgba(81, 207, 102, 0.3) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255, 107, 107, 0.3) 1px, transparent 1px);
+    background-size: 50px 50px, 80px 80px, 100px 100px;
+    background-position: 0 0, 20px 20px, 40px 40px;
+    opacity: 0.1;
+    animation: particles 20s linear infinite;
+}
+
+/* Effet de hover sur les lignes de tableau avec transition douce */
+#content .hoverable tr {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Cartes avec effet glassmorphism */
+.card-glass {
+    background: rgba(26, 26, 46, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 217, 255, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+}
+
+.card-glass:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6),
+                0 0 30px rgba(0, 217, 255, 0.3);
+    border-color: rgba(0, 217, 255, 0.5);
+}
+
+/* Loader animé */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loader {
+    border: 3px solid rgba(0, 217, 255, 0.2);
+    border-top: 3px solid #00d9ff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+}
+
+/* Texte avec effet gradient animé */
+.gradient-text {
+    background: linear-gradient(90deg, #00d9ff, #51cf66, #ff6b6b, #00d9ff);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Badges stylés */
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.badge-success {
+    background: linear-gradient(135deg, #51cf66, #8ce99a);
+    color: #0a0a1a;
+}
+
+.badge-info {
+    background: linear-gradient(135deg, #22d3ee, #67e8f9);
+    color: #0a0a1a;
+}
+
+.badge-warning {
+    background: linear-gradient(135deg, #ffd43b, #ffe066);
+    color: #0a0a1a;
+}
+
+.badge-danger {
+    background: linear-gradient(135deg, #ff6b6b, #ff8787);
+    color: #0a0a1a;
+}
