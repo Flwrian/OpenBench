@@ -43,7 +43,6 @@ body::before {
         url("https://media.cnn.com/api/v1/images/stellar/prod/230527051429-03-magnus-carlsen-superbet-rapid-blitz-2023.jpg?c=16x9&q=h_833,w_1480,c_fill") center/cover fixed;
     pointer-events: none;
     z-index: -1;
-    animation: bgPulse 12s ease-in-out infinite;
 }
 
 body::after {
@@ -52,10 +51,9 @@ body::after {
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(167, 139, 250, 0.15), transparent 70%);
+    background: url("https://media.cnn.com/api/v1/images/stellar/prod/230527051429-03-magnus-carlsen-superbet-rapid-blitz-2023.jpg?c=16x9&q=h_833,w_1480,c_fill") center/cover fixed;
     pointer-events: none;
     z-index: -1;
-    animation: floatBubble1 20s ease-in-out infinite;
 }
 
 @keyframes bgPulse {
