@@ -94,32 +94,6 @@
 #sidebar li:nth-child(9) { animation-delay: 0.45s; }
 #sidebar li:nth-child(10) { animation-delay: 0.5s; }
 
-/* Effet de brillance sur les boutons */
-.anchorbutton {
-    background-size: 200% auto;
-    position: relative;
-}
-
-.anchorbutton::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.3),
-        transparent
-    );
-    transition: 0.6s;
-}
-
-.anchorbutton:hover::after {
-    left: 100%;
-}
-
 /* Effet de pulsation sur les éléments importants */
 .statblock-green,
 .statblock-blue {

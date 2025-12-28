@@ -22,8 +22,9 @@ body {
     --success-color: #34d399;
     --warning-color: #fbbf24;
 
-    background: linear-gradient(135deg, #0a0a0f 0%, #13131a 50%, #1c1c28 100%);
-    background-attachment: fixed;
+    background: 
+        linear-gradient(135deg, rgba(10, 10, 15, 0.92) 0%, rgba(19, 19, 26, 0.90) 50%, rgba(28, 28, 40, 0.88) 100%),
+        url('https://media.cnn.com/api/v1/images/stellar/prod/230527051429-03-magnus-carlsen-superbet-rapid-blitz-2023.jpg?c=16x9&q=h_833,w_1480,c_fill') center/cover fixed;
     overflow-x: hidden;
 
     font-size: 16px;
@@ -351,30 +352,12 @@ body, html, main{
     color: var(--color-font1);
     display: inline-block;
     text-align: center;
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: all 0.2s ease;
     font-family: "Courier Prime", serif;
     font-size: 13px;
     cursor: pointer;
     position: relative;
     overflow: hidden;
-}
-
-#content .anchorbutton::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
-}
-
-#content .anchorbutton:hover::before {
-    width: 400px;
-    height: 400px;
 }
 
 #content .btn-blue {
@@ -413,39 +396,30 @@ body, html, main{
 }
 
 #content .btn-blue:hover {
-    background: linear-gradient(135deg, #5865f2 0%, #7289da 100%);
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 8px 30px rgba(88, 101, 242, 0.5), 0 0 30px rgba(167, 139, 250, 0.3);
+    opacity: 0.9;
 }
 
 #content .btn-start:hover {
-    background: linear-gradient(135deg, #7289da 0%, #8ea1e1 100%);
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 8px 30px rgba(114, 137, 218, 0.5), 0 0 30px rgba(167, 139, 250, 0.3);
+    opacity: 0.9;
 }
 
 #content .btn-preset:hover {
-    background: linear-gradient(135deg, #34d399 0%, #6ee7b7 100%);
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 8px 30px rgba(52, 211, 153, 0.5), 0 0 30px rgba(52, 211, 153, 0.3);
+    opacity: 0.9;
 }
 
 #content .btn-yellow:hover {
-    background: linear-gradient(135deg, #fbbf24 0%, #fcd34d 100%);
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 8px 30px rgba(251, 191, 36, 0.5), 0 0 30px rgba(251, 191, 36, 0.3);
+    opacity: 0.9;
 }
 
 #content .btn-red:hover {
-    background: linear-gradient(135deg, #fb7185 0%, #fda4af 100%);
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 8px 30px rgba(251, 113, 133, 0.5), 0 0 30px rgba(251, 113, 133, 0.3);
+    opacity: 0.9;
 }
 
 #content .btn-disabled:hover {
     background: var(--color3);
     cursor: not-allowed;
     transform: none;
+    opacity: 0.5;
 }
 
 #content .copy-button {
