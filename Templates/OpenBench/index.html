@@ -4,43 +4,126 @@
 
 {% block content %}
 
-    <table class="test-list stripes hoverable">
+    <style>
+        .section-header {
+            background: linear-gradient(135deg, rgba(232, 121, 249, 0.2) 0%, rgba(240, 171, 252, 0.1) 100%);
+            backdrop-filter: blur(10px);
+            padding: 16px 24px;
+            border-radius: 12px;
+            margin: 20px 0 12px 0;
+            border: 1px solid rgba(232, 121, 249, 0.3);
+            box-shadow: 0 4px 15px rgba(232, 121, 249, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-header::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background: linear-gradient(180deg, #e879f9, #f0abfc);
+            border-radius: 12px 0 0 12px;
+        }
+        
+        .section-header h3 {
+            margin: 0;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fae8ff;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-shadow: 0 2px 8px rgba(232, 121, 249, 0.3);
+        }
+        
+        .section-header .icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #e879f9, #f0abfc);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a0f1f;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 12px rgba(232, 121, 249, 0.4);
+        }
+        
+        .priority-separator {
+            margin: 12px 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(232, 121, 249, 0.3), transparent);
+            position: relative;
+        }
+        
+        .priority-separator::after {
+            content: '⬥';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(37, 24, 41, 0.9);
+            color: #e879f9;
+            padding: 0 12px;
+            font-size: 0.8rem;
+        }
+    </style>
+
+    <table class="test-list" style="border-collapse: separate; border-spacing: 0;">
 
         <!-- Only show Pending tests for the front page of the Index -->
         {% if paging.page == 1 %}
 
             <!-- Currently Pending tests (Waiting to be approved) -->
             {% if pending %}
-                <tr class="table-header"><th colspan='6'>Pending</th></tr>
+                <tr><td colspan="6" class="section-header">
+                    <h3>
+                        <div class="icon"><i class="fas fa-hourglass-half"></i></div>
+                        <span>Pending Approval</span>
+                        <span style="margin-left: auto; font-size: 0.9rem; opacity: 0.8;">({{pending|length}})</span>
+                    </h3>
+                </td></tr>
                 {% for test in pending %}
                     <tr>
                         {% include "OpenBench/Blocks/testsummary.html" %}
                     </tr>
                 {% endfor %}
-                <tr class="table-spacer"><th colspan='6'></th></tr>
             {% endif %}
 
             <!-- Currently Awaiting tests (Waiting for Artifacts) -->
             {% if awaiting %}
-                <tr class="table-header"><th colspan='6'>Awaiting Artifacts</th></tr>
+                <tr><td colspan="6" class="section-header">
+                    <h3>
+                        <div class="icon"><i class="fas fa-download"></i></div>
+                        <span>Awaiting Artifacts</span>
+                        <span style="margin-left: auto; font-size: 0.9rem; opacity: 0.8;">({{awaiting|length}})</span>
+                    </h3>
+                </td></tr>
                 {% for test in awaiting %}
                     <tr>
                         {% include "OpenBench/Blocks/testsummary.html" %}
                     </tr>
                 {% endfor %}
-                <tr class="table-spacer"><th colspan='6'></th></tr>
             {% endif %}
 
             <!-- Currently Running tests (Waiting to be completed) -->
             {% if active %}
-                <tr class="table-header"><th colspan='6'>Active {{status}}</th></tr>
+                <tr><td colspan="6" class="section-header">
+                    <h3>
+                        <div class="icon"><i class="fas fa-rocket"></i></div>
+                        <span>Active {{status}}</span>
+                        <span style="margin-left: auto; font-size: 0.9rem; opacity: 0.8;">({{active|length}})</span>
+                    </h3>
+                </td></tr>
                 {% for test in active %}
 
-                    <!-- Add two empty rows ( for the colouring scheme ) when changing prio -->
+                    <!-- Add separator when changing priority -->
                     {% with prev_test=active|previous:forloop.counter0 %}
                         {% if prev_test and prev_test.priority != test.priority %}
-                            <tr class="table-spacer-small"><th colspan='6'></th></tr>
-                            <tr class="table-spacer-small"><th colspan='6'></th></tr>
+                            <tr><td colspan="6"><div class="priority-separator"></div></td></tr>
                         {% endif %}
                     {% endwith %}
 
@@ -48,16 +131,22 @@
                         {% include "OpenBench/Blocks/testsummary.html" %}
                     </tr>
                 {% endfor %}
-                <tr class="table-spacer"><th colspan='6'></th></tr>
             {% endif %}
 
         {% endif %}
 
         <!-- Tests which have already finished -->
-        <tr class="table-header"><th colspan='6'>Finished</th></tr>
+        <tr><td colspan="6" class="section-header">
+            <h3>
+                <div class="icon"><i class="fas fa-flag-checkered"></i></div>
+                <span>Finished</span>
+                <span style="margin-left: auto; font-size: 0.9rem; opacity: 0.8;">({{completed|length}})</span>
+            </h3>
+        </td></tr>
         {% for test in completed %}
             <tr>
                 {% include "OpenBench/Blocks/testsummary.html" %}
+            </tr>
             </tr>
         {% endfor %}
 

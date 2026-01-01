@@ -1,59 +1,247 @@
 {% load mytags %}
-<td style="padding: 12px 8px;">
-    <div style="display: flex; align-items: center; gap: 8px;">
-        <i class="fas fa-user" style="color: var(--color-font3); font-size: 0.9rem;"></i>
-        <a href="/user/{{test.author}}" style="font-weight: 500;">{{test.author|capfirst|slice:":8"}}</a>
-    </div>
-</td>
-<td style="padding: 12px 8px;">
-    <div style="display: inline-block; padding: 4px 10px; background: rgba(232, 121, 249, 0.15); border-radius: 8px; font-size: 0.9rem; font-weight: 500; border: 1px solid rgba(232, 121, 249, 0.25);">
-        {{test.dev_engine}}
-    </div>
-</td>
-<td style="padding: 12px 8px;">
-    <div style="display: flex; flex-direction: column; gap: 4px;">
-        <div style="display: flex; align-items: center; gap: 6px;">
-            <i class="fas fa-code-branch" style="color: var(--color-font3); font-size: 0.85rem;"></i>
-            <a href="{{test|workload_url}}" style="font-weight: 500; color: var(--color-font1);">{{test|git_diff_text}}</a>
+<td colspan="6" style="padding: 0;">
+    <div class="test-card" style="
+        background: linear-gradient(135deg, rgba(37, 24, 41, 0.6) 0%, rgba(49, 32, 53, 0.4) 100%);
+        backdrop-filter: blur(10px);
+        border-radius: 12px;
+        margin: 8px 4px;
+        padding: 16px 20px;
+        border: 1px solid rgba(232, 121, 249, 0.15);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    " 
+    onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 30px rgba(232, 121, 249, 0.25), 0 0 20px rgba(232, 121, 249, 0.1)'; this.style.borderColor='rgba(232, 121, 249, 0.35)';"
+    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0, 0, 0, 0.2)'; this.style.borderColor='rgba(232, 121, 249, 0.15)';"
+    onclick="window.location='{{test|workload_url}}'">
+        
+        <!-- Gradient accent bar on left -->
+        <div style="
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #e879f9, #f0abfc, #fae8ff);
+            border-radius: 12px 0 0 12px;
+        "></div>
+
+        <!-- Main content -->
+        <div style="display: grid; grid-template-columns: auto 1fr auto auto; gap: 20px; align-items: center;">
+            
+            <!-- Left section: Author & Engine -->
+            <div style="display: flex; flex-direction: column; gap: 8px; min-width: 140px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <div style="
+                        width: 32px;
+                        height: 32px;
+                        background: linear-gradient(135deg, #e879f9, #f0abfc);
+                        border-radius: 8px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-weight: 700;
+                        color: #1a0f1f;
+                        font-size: 0.95rem;
+                        box-shadow: 0 2px 8px rgba(232, 121, 249, 0.3);
+                    ">
+                        {{test.author|first|upper}}
+                    </div>
+                    <div style="display: flex; flex-direction: column;">
+                        <a href="/user/{{test.author}}" style="
+                            font-weight: 600;
+                            font-size: 0.95rem;
+                            color: var(--color-font1);
+                            text-decoration: none;
+                            transition: color 0.2s;
+                        " onclick="event.stopPropagation();">{{test.author|capfirst}}</a>
+                        <span style="font-size: 0.75rem; color: var(--color-font2); opacity: 0.7;">Author</span>
+                    </div>
+                </div>
+                <div style="
+                    display: inline-block;
+                    padding: 6px 12px;
+                    background: linear-gradient(135deg, rgba(232, 121, 249, 0.2), rgba(240, 171, 252, 0.15));
+                    border: 1px solid rgba(232, 121, 249, 0.3);
+                    border-radius: 8px;
+                    font-size: 0.85rem;
+                    font-weight: 600;
+                    color: #fae8ff;
+                    text-align: center;
+                    box-shadow: 0 2px 8px rgba(232, 121, 249, 0.15);
+                ">
+                    <i class="fas fa-chess-knight" style="margin-right: 6px; font-size: 0.9rem;"></i>{{test.dev_engine}}
+                </div>
+            </div>
+
+            <!-- Center section: Branches & Info -->
+            <div style="display: flex; flex-direction: column; gap: 10px; flex: 1;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="
+                        padding: 8px 14px;
+                        background: rgba(26, 15, 31, 0.6);
+                        border: 1px solid rgba(232, 121, 249, 0.25);
+                        border-radius: 8px;
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        flex: 1;
+                    ">
+                        <i class="fas fa-code-branch" style="color: #e879f9; font-size: 1rem;"></i>
+                        <a href="{{test|workload_url}}" style="
+                            font-family: 'Courier New', monospace;
+                            font-size: 0.9rem;
+                            font-weight: 600;
+                            color: #d8b4fe;
+                            text-decoration: none;
+                            flex: 1;
+                        " onclick="event.stopPropagation();">{{test|git_diff_text}}</a>
+                    </div>
+                    <a href="{{test|gitDiffLink}}" style="
+                        padding: 8px 14px;
+                        background: linear-gradient(135deg, rgba(167, 139, 250, 0.25), rgba(192, 132, 252, 0.2));
+                        border: 1px solid rgba(167, 139, 250, 0.4);
+                        border-radius: 8px;
+                        display: flex;
+                        align-items: center;
+                        gap: 6px;
+                        text-decoration: none;
+                        color: #e9d5ff;
+                        font-size: 0.85rem;
+                        font-weight: 600;
+                        transition: all 0.2s;
+                        white-space: nowrap;
+                    " onclick="event.stopPropagation();"
+                    onmouseover="this.style.background='linear-gradient(135deg, rgba(167, 139, 250, 0.35), rgba(192, 132, 252, 0.3))'; this.style.transform='scale(1.05)';"
+                    onmouseout="this.style.background='linear-gradient(135deg, rgba(167, 139, 250, 0.25), rgba(192, 132, 252, 0.2))'; this.style.transform='scale(1)';">
+                        <i class="fas fa-code-compare"></i>View Diff
+                    </a>
+                </div>
+
+                <!-- Time control & badges -->
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                    <div style="
+                        display: flex;
+                        align-items: center;
+                        gap: 6px;
+                        padding: 4px 10px;
+                        background: rgba(49, 32, 53, 0.5);
+                        border: 1px solid rgba(232, 121, 249, 0.2);
+                        border-radius: 6px;
+                        font-family: 'Courier New', monospace;
+                        font-size: 0.85rem;
+                        color: #d8b4fe;
+                    ">
+                        <i class="fas fa-clock" style="color: #f0abfc; font-size: 0.8rem;"></i>
+                        {{test.dev_time_control}}
+                    </div>
+                    
+                    {% if test.error %}
+                    <div style="
+                        display: flex;
+                        align-items: center;
+                        gap: 4px;
+                        padding: 4px 10px;
+                        background: rgba(239, 68, 68, 0.15);
+                        border: 1px solid rgba(239, 68, 68, 0.4);
+                        border-radius: 6px;
+                        color: #fca5a5;
+                        font-size: 0.8rem;
+                        font-weight: 600;
+                        cursor: help;
+                    " title="Crash or illegal move">
+                        <i class="fas fa-exclamation-triangle"></i>ERROR
+                    </div>
+                    {% endif %}
+                    
+                    {% if test|test_is_fischer %}
+                    <div style="
+                        display: flex;
+                        align-items: center;
+                        gap: 4px;
+                        padding: 4px 10px;
+                        background: rgba(52, 211, 153, 0.15);
+                        border: 1px solid rgba(52, 211, 153, 0.4);
+                        border-radius: 6px;
+                        color: #6ee7b7;
+                        font-size: 0.8rem;
+                        font-weight: 600;
+                        cursor: help;
+                    " title="Fischer Random Chess">
+                        <i class="fas fa-chess"></i>FRC
+                    </div>
+                    {% endif %}
+                    
+                    {% if test|test_is_time_odds %}
+                    <div style="
+                        display: flex;
+                        align-items: center;
+                        gap: 4px;
+                        padding: 4px 10px;
+                        background: rgba(251, 191, 36, 0.15);
+                        border: 1px solid rgba(251, 191, 36, 0.4);
+                        border-radius: 6px;
+                        color: #fde047;
+                        font-size: 0.8rem;
+                        font-weight: 600;
+                        cursor: help;
+                    " title="Time Odds">
+                        <i class="fas fa-hourglass-half"></i>TIME
+                    </div>
+                    {% endif %}
+                    
+                    {% if test|test_is_smp_odds %}
+                    <div style="
+                        display: flex;
+                        align-items: center;
+                        gap: 4px;
+                        padding: 4px 10px;
+                        background: rgba(249, 115, 22, 0.15);
+                        border: 1px solid rgba(249, 115, 22, 0.4);
+                        border-radius: 6px;
+                        color: #fdba74;
+                        font-size: 0.8rem;
+                        font-weight: 600;
+                        cursor: help;
+                    " title="Thread Odds">
+                        <i class="fas fa-microchip"></i>SMP
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Right section: Stats -->
+            <div style="
+                min-width: 140px;
+                padding: 12px 16px;
+                background: linear-gradient(135deg, var(--statblock-bg-start, #c084fc), var(--statblock-bg-end, #e9d5ff));
+                border-radius: 10px;
+                text-align: center;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.1);
+                border: 2px solid rgba(255, 255, 255, 0.15);
+            " class="statblock-mini statblock-{{test|testResultColour}}">
+                <div style="
+                    font-size: 1.15rem;
+                    font-weight: 800;
+                    color: #1a0f1f;
+                    line-height: 1.3;
+                    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+                ">{{test|shortStatBlock|linebreaksbr}}</div>
+            </div>
+
         </div>
-        <div style="display: flex; gap: 6px; font-size: 0.85rem;">
-            {% if test.error %}
-                <span style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(239, 68, 68, 0.3); cursor: help;" title="Crash or illegal move">
-                    <i class="fas fa-exclamation-triangle"></i> Error
-                </span>
-            {% endif %}
-            {% if test|test_is_fischer %}
-                <span style="background: rgba(52, 211, 153, 0.2); color: #6ee7b7; padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(52, 211, 153, 0.3); cursor: help;" title="Fischer random chess">
-                    <i class="fas fa-chess"></i> FRC
-                </span>
-            {% endif %}
-            {% if test|test_is_time_odds %}
-                <span style="background: rgba(251, 191, 36, 0.2); color: #fde047; padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(251, 191, 36, 0.3); cursor: help;" title="Time odds">
-                    <i class="fas fa-clock"></i> Time
-                </span>
-            {% endif %}
-            {% if test|test_is_smp_odds %}
-                <span style="background: rgba(249, 115, 22, 0.2); color: #fdba74; padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(249, 115, 22, 0.3); cursor: help;" title="Thread odds">
-                    <i class="fas fa-microchip"></i> SMP
-                </span>
-            {% endif %}
-        </div>
-    </div>
-</td>
-<td class="textcenter" style="padding: 12px 8px;">
-    <a href="{{test|gitDiffLink}}" style="display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; background: rgba(167, 139, 250, 0.15); border-radius: 6px; border: 1px solid rgba(167, 139, 250, 0.3); transition: all 0.2s ease;">
-        <i class="fas fa-code-compare" style="font-size: 0.85rem;"></i>
-        <span style="font-size: 0.9rem;">diff</span>
-    </a>
-</td>
-<td style="padding: 12px 8px;">
-    <div style="display: flex; align-items: center; gap: 6px;">
-        <i class="fas fa-stopwatch" style="color: var(--color-font3); font-size: 0.85rem;"></i>
-        <span style="font-family: 'Courier New', monospace; font-size: 0.9rem;">{{test.dev_time_control}}</span>
-    </div>
-</td>
-<td class='statblock statblock-{{test|testResultColour}}' style="padding: 10px 12px; font-size: 0.95rem;">
-    <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
-        <strong style="font-size: 1rem;">{{test|shortStatBlock|linebreaksbr}}</strong>
+
+        <!-- Decorative corner accent -->
+        <div style="
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle at top right, rgba(232, 121, 249, 0.1), transparent 70%);
+            pointer-events: none;
+        "></div>
     </div>
 </td>
