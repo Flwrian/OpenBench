@@ -1,57 +1,59 @@
 {% load mytags %}
-<td style="padding: 8px 6px;">
-    <div style="display: flex; align-items: center; gap: 6px;">
-        <i class="fas fa-user" style="color: var(--color-font3); font-size: 0.85rem;"></i>
-        <a href="/user/{{test.author}}" style="font-weight: 500; font-size: 0.9rem;">{{test.author|capfirst|slice:":8"}}</a>
+<td style="padding: 12px 8px;">
+    <div style="display: flex; align-items: center; gap: 8px;">
+        <i class="fas fa-user" style="color: var(--color-font3); font-size: 0.9rem;"></i>
+        <a href="/user/{{test.author}}" style="font-weight: 500;">{{test.author|capfirst|slice:":8"}}</a>
     </div>
 </td>
-<td style="padding: 8px 6px;">
-    <div style="display: inline-block; padding: 3px 8px; background: rgba(232, 121, 249, 0.15); border-radius: 6px; font-size: 0.85rem; font-weight: 500; border: 1px solid rgba(232, 121, 249, 0.25);">
+<td style="padding: 12px 8px;">
+    <div style="display: inline-block; padding: 4px 10px; background: rgba(232, 121, 249, 0.15); border-radius: 8px; font-size: 0.9rem; font-weight: 500; border: 1px solid rgba(232, 121, 249, 0.25);">
         {{test.dev_engine}}
     </div>
 </td>
-<td style="padding: 8px 6px;">
-    <div style="display: flex; flex-direction: column; gap: 3px;">
-        <div style="display: flex; align-items: center; gap: 5px;">
-            <i class="fas fa-code-branch" style="color: var(--color-font3); font-size: 0.8rem;"></i>
-            <a href="{{test|workload_url}}" style="font-weight: 500; color: var(--color-font1); font-size: 0.9rem;">{{test|git_diff_text}}</a>
+<td style="padding: 12px 8px;">
+    <div style="display: flex; flex-direction: column; gap: 4px;">
+        <div style="display: flex; align-items: center; gap: 6px;">
+            <i class="fas fa-code-branch" style="color: var(--color-font3); font-size: 0.85rem;"></i>
+            <a href="{{test|workload_url}}" style="font-weight: 500; color: var(--color-font1);">{{test|git_diff_text}}</a>
         </div>
-        <div style="display: flex; gap: 4px; font-size: 0.8rem;">
+        <div style="display: flex; gap: 6px; font-size: 0.85rem;">
             {% if test.error %}
-                <span style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; padding: 1px 5px; border-radius: 4px; border: 1px solid rgba(239, 68, 68, 0.3); cursor: help;" title="Crash or illegal move">
+                <span style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(239, 68, 68, 0.3); cursor: help;" title="Crash or illegal move">
                     <i class="fas fa-exclamation-triangle"></i> Error
                 </span>
             {% endif %}
             {% if test|test_is_fischer %}
-                <span style="background: rgba(52, 211, 153, 0.2); color: #6ee7b7; padding: 1px 5px; border-radius: 4px; border: 1px solid rgba(52, 211, 153, 0.3); cursor: help;" title="Fischer random chess">
+                <span style="background: rgba(52, 211, 153, 0.2); color: #6ee7b7; padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(52, 211, 153, 0.3); cursor: help;" title="Fischer random chess">
                     <i class="fas fa-chess"></i> FRC
                 </span>
             {% endif %}
             {% if test|test_is_time_odds %}
-                <span style="background: rgba(251, 191, 36, 0.2); color: #fde047; padding: 1px 5px; border-radius: 4px; border: 1px solid rgba(251, 191, 36, 0.3); cursor: help;" title="Time odds">
+                <span style="background: rgba(251, 191, 36, 0.2); color: #fde047; padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(251, 191, 36, 0.3); cursor: help;" title="Time odds">
                     <i class="fas fa-clock"></i> Time
                 </span>
             {% endif %}
             {% if test|test_is_smp_odds %}
-                <span style="background: rgba(249, 115, 22, 0.2); color: #fdba74; padding: 1px 5px; border-radius: 4px; border: 1px solid rgba(249, 115, 22, 0.3); cursor: help;" title="Thread odds">
+                <span style="background: rgba(249, 115, 22, 0.2); color: #fdba74; padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(249, 115, 22, 0.3); cursor: help;" title="Thread odds">
                     <i class="fas fa-microchip"></i> SMP
                 </span>
             {% endif %}
         </div>
     </div>
 </td>
-<td class="textcenter" style="padding: 8px 6px;">
-    <a href="{{test|gitDiffLink}}" style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; background: rgba(167, 139, 250, 0.15); border-radius: 6px; border: 1px solid rgba(167, 139, 250, 0.3); transition: all 0.2s ease; font-size: 0.85rem;">
-        <i class="fas fa-code-compare" style="font-size: 0.8rem;"></i>
-        <span>diff</span>
+<td class="textcenter" style="padding: 12px 8px;">
+    <a href="{{test|gitDiffLink}}" style="display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; background: rgba(167, 139, 250, 0.15); border-radius: 6px; border: 1px solid rgba(167, 139, 250, 0.3); transition: all 0.2s ease;">
+        <i class="fas fa-code-compare" style="font-size: 0.85rem;"></i>
+        <span style="font-size: 0.9rem;">diff</span>
     </a>
 </td>
-<td style="padding: 8px 6px;">
-    <div style="display: flex; align-items: center; gap: 5px;">
-        <i class="fas fa-stopwatch" style="color: var(--color-font3); font-size: 0.8rem;"></i>
-        <span style="font-family: 'Courier New', monospace; font-size: 0.85rem;">{{test.dev_time_control}}</span>
+<td style="padding: 12px 8px;">
+    <div style="display: flex; align-items: center; gap: 6px;">
+        <i class="fas fa-stopwatch" style="color: var(--color-font3); font-size: 0.85rem;"></i>
+        <span style="font-family: 'Courier New', monospace; font-size: 0.9rem;">{{test.dev_time_control}}</span>
     </div>
 </td>
-<td class='statblock statblock-{{test|testResultColour}}' style="padding: 6px 10px;">
-    <strong style="font-size: 0.9rem; line-height: 1.3;">{{test|shortStatBlock|linebreaksbr}}</strong>
+<td class='statblock statblock-{{test|testResultColour}}' style="padding: 10px 12px; font-size: 0.95rem;">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
+        <strong style="font-size: 1rem;">{{test|shortStatBlock|linebreaksbr}}</strong>
+    </div>
 </td>

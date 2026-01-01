@@ -94,11 +94,9 @@
 #sidebar li:nth-child(9) { animation-delay: 0.45s; }
 #sidebar li:nth-child(10) { animation-delay: 0.5s; }
 
-/* Effet de pulsation sur les éléments importants - DÉSACTIVÉ */
-/* .statblock-green,
-.statblock-blue {
-    animation: pulse 3s ease-in-out infinite;
-} */
+/* Effet de pulsation sur les éléments importants */
+.statblock-green,
+
 
 /* Scrollbar personnalisée */
 ::-webkit-scrollbar {
