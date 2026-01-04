@@ -1,12 +1,12 @@
 {% load mytags %}
 <td colspan="6" style="padding: 0;">
     <div class="test-card" style="
-        background: linear-gradient(135deg, rgba(37, 24, 41, 0.6) 0%, rgba(49, 32, 53, 0.4) 100%);
+        background: linear-gradient(135deg, rgba(10, 25, 41, 0.6) 0%, rgba(15, 35, 50, 0.4) 100%);
         backdrop-filter: blur(10px);
         border-radius: 12px;
         margin: 8px 4px;
         padding: 16px 20px;
-        border: 1px solid rgba(232, 121, 249, 0.15);
+        border: 1px solid rgba(94, 234, 212, 0.15);
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         transition: none;
         cursor: pointer;
@@ -22,7 +22,7 @@
             top: 0;
             bottom: 0;
             width: 4px;
-            background: linear-gradient(180deg, #e879f9, #f0abfc, #fae8ff);
+            background: linear-gradient(180deg, #5eead4, #3b82f6, #ccfbf1);
             border-radius: 12px 0 0 12px;
         "></div>
 
@@ -35,15 +35,15 @@
                     <div style="
                         width: 32px;
                         height: 32px;
-                        background: linear-gradient(135deg, #e879f9, #f0abfc);
+                        background: linear-gradient(135deg, #5eead4, #3b82f6);
                         border-radius: 8px;
                         display: flex;
                         align-items: center;
                         justify-content: center;
                         font-weight: 700;
-                        color: #1a0f1f;
+                        color: #0a1929;
                         font-size: 0.95rem;
-                        box-shadow: 0 2px 8px rgba(232, 121, 249, 0.3);
+                        box-shadow: 0 2px 8px rgba(94, 234, 212, 0.3);
                     ">
                         {{test.author|first|upper}}
                     </div>
@@ -61,14 +61,14 @@
                 <div style="
                     display: inline-block;
                     padding: 6px 12px;
-                    background: linear-gradient(135deg, rgba(232, 121, 249, 0.2), rgba(240, 171, 252, 0.15));
-                    border: 1px solid rgba(232, 121, 249, 0.3);
+                    background: linear-gradient(135deg, rgba(94, 234, 212, 0.2), rgba(59, 130, 246, 0.15));
+                    border: 1px solid rgba(94, 234, 212, 0.3);
                     border-radius: 8px;
                     font-size: 0.85rem;
                     font-weight: 600;
-                    color: #fae8ff;
+                    color: #ccfbf1;
                     text-align: center;
-                    box-shadow: 0 2px 8px rgba(232, 121, 249, 0.15);
+                    box-shadow: 0 2px 8px rgba(94, 234, 212, 0.15);
                 ">
                     <i class="fas fa-chess-knight" style="margin-right: 6px; font-size: 0.9rem;"></i>{{test.dev_engine}}
                 </div>
@@ -79,41 +79,41 @@
                 <div style="display: flex; align-items: center; gap: 10px;">
                     <div style="
                         padding: 8px 14px;
-                        background: rgba(26, 15, 31, 0.6);
-                        border: 1px solid rgba(232, 121, 249, 0.25);
+                        background: rgba(10, 25, 41, 0.6);
+                        border: 1px solid rgba(94, 234, 212, 0.25);
                         border-radius: 8px;
                         display: flex;
                         align-items: center;
                         gap: 8px;
                         flex: 1;
                     ">
-                        <i class="fas fa-code-branch" style="color: #e879f9; font-size: 1rem;"></i>
+                        <i class="fas fa-code-branch" style="color: #5eead4; font-size: 1rem;"></i>
                         <a href="{{test|workload_url}}" style="
                             font-family: 'Courier New', monospace;
                             font-size: 0.9rem;
                             font-weight: 600;
-                            color: #d8b4fe;
+                            color: #a5f3fc;
                             text-decoration: none;
                             flex: 1;
                         " onclick="event.stopPropagation();">{{test|git_diff_text}}</a>
                     </div>
                     <a href="{{test|gitDiffLink}}" style="
                         padding: 8px 14px;
-                        background: linear-gradient(135deg, rgba(167, 139, 250, 0.25), rgba(192, 132, 252, 0.2));
-                        border: 1px solid rgba(167, 139, 250, 0.4);
+                        background: linear-gradient(135deg, rgba(94, 234, 212, 0.25), rgba(59, 130, 246, 0.2));
+                        border: 1px solid rgba(94, 234, 212, 0.4);
                         border-radius: 8px;
                         display: flex;
                         align-items: center;
                         gap: 6px;
                         text-decoration: none;
-                        color: #e9d5ff;
+                        color: #ccfbf1;
                         font-size: 0.85rem;
                         font-weight: 600;
                         transition: all 0.2s;
                         white-space: nowrap;
                     " onclick="event.stopPropagation();"
-                    onmouseover="this.style.background='linear-gradient(135deg, rgba(167, 139, 250, 0.35), rgba(192, 132, 252, 0.3))'; this.style.transform='scale(1.05)';"
-                    onmouseout="this.style.background='linear-gradient(135deg, rgba(167, 139, 250, 0.25), rgba(192, 132, 252, 0.2))'; this.style.transform='scale(1)';">
+                    onmouseover="this.style.background='linear-gradient(135deg, rgba(94, 234, 212, 0.35), rgba(59, 130, 246, 0.3))'; this.style.transform='scale(1.05)';"
+                    onmouseout="this.style.background='linear-gradient(135deg, rgba(94, 234, 212, 0.25), rgba(59, 130, 246, 0.2))'; this.style.transform='scale(1)';">
                         <i class="fas fa-code-compare"></i>View Diff
                     </a>
                 </div>
@@ -125,14 +125,14 @@
                         align-items: center;
                         gap: 6px;
                         padding: 4px 10px;
-                        background: rgba(49, 32, 53, 0.5);
-                        border: 1px solid rgba(232, 121, 249, 0.2);
+                        background: rgba(15, 35, 50, 0.5);
+                        border: 1px solid rgba(94, 234, 212, 0.2);
                         border-radius: 6px;
                         font-family: 'Courier New', monospace;
                         font-size: 0.85rem;
-                        color: #d8b4fe;
+                        color: #a5f3fc;
                     ">
-                        <i class="fas fa-clock" style="color: #f0abfc; font-size: 0.8rem;"></i>
+                        <i class="fas fa-clock" style="color: #3b82f6; font-size: 0.8rem;"></i>
                         {{test.dev_time_control}}
                     </div>
                     
@@ -214,7 +214,7 @@
             <div style="
                 min-width: 90px;
                 padding: 6px 10px;
-                background: linear-gradient(135deg, var(--statblock-bg-start, #c084fc), var(--statblock-bg-end, #e9d5ff));
+                background: linear-gradient(135deg, var(--statblock-bg-start, #5eead4), var(--statblock-bg-end, #3b82f6));
                 border-radius: 6px;
                 text-align: center;
                 box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
@@ -223,7 +223,7 @@
                 <div style="
                     font-size: 0.85rem;
                     font-weight: 700;
-                    color: #1a0f1f;
+                    color: #0a1929;
                     line-height: 1.2;
                     text-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);
                 ">{{test|shortStatBlock|linebreaksbr}}</div>
@@ -238,7 +238,7 @@
             right: 0;
             width: 100px;
             height: 100px;
-            background: radial-gradient(circle at top right, rgba(232, 121, 249, 0.1), transparent 70%);
+            background: radial-gradient(circle at top right, rgba(94, 234, 212, 0.1), transparent 70%);
             pointer-events: none;
         "></div>
     </div>

@@ -2,11 +2,45 @@
    ANIMATIONS STYLÉES POUR OPENBENCH
    ======================================== */
 
-/* Animation de chargement pour les éléments */
+/* Scrollbar personnalisé */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0d0d0d;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #5eead4, #3b82f6);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #22d3ee;
+}
+
+/* Loader (spinner) */
+.loader {
+    border: 3px solid rgba(94, 234, 212, 0.2);
+    border-top: 3px solid #5eead4;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Fade in animation */
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(40px);
+        transform: translateY(20px);
     }
     to {
         opacity: 1;
@@ -14,10 +48,15 @@
     }
 }
 
+.fadeInUp {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+/* Slide in animation */
 @keyframes slideInLeft {
     from {
         opacity: 0;
-        transform: translateX(-60px);
+        transform: translateX(-20px);
     }
     to {
         opacity: 1;
@@ -25,213 +64,36 @@
     }
 }
 
-@keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.08);
-    }
+.slideInLeft {
+    animation: slideInLeft 0.4s ease-out;
 }
 
-@keyframes shimmer {
-    0% {
-        background-position: -1000px 0;
-    }
-    100% {
-        background-position: 1000px 0;
-    }
-}
-
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-15px);
-    }
-}
-
-/* Effet de particules montantes */
-@keyframes particlesRise {
-    0% {
-        transform: translateY(100vh) scale(0) rotate(0deg);
-        opacity: 0;
-    }
-    10% {
-        opacity: 0.8;
-    }
-    50% {
-        opacity: 0.6;
-    }
-    90% {
-        opacity: 0.3;
-    }
-    100% {
-        transform: translateY(-20vh) scale(1.5) rotate(360deg);
-        opacity: 0;
-    }
-}
-
-/* Appliquer les animations aux éléments */
-#content table {
-    animation: fadeInUp 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-#sidebar li {
-    animation: slideInLeft 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-    animation-fill-mode: both;
-}
-
-#sidebar li:nth-child(1) { animation-delay: 0.05s; }
-#sidebar li:nth-child(2) { animation-delay: 0.1s; }
-#sidebar li:nth-child(3) { animation-delay: 0.15s; }
-#sidebar li:nth-child(4) { animation-delay: 0.2s; }
-#sidebar li:nth-child(5) { animation-delay: 0.25s; }
-#sidebar li:nth-child(6) { animation-delay: 0.3s; }
-#sidebar li:nth-child(7) { animation-delay: 0.35s; }
-#sidebar li:nth-child(8) { animation-delay: 0.4s; }
-#sidebar li:nth-child(9) { animation-delay: 0.45s; }
-#sidebar li:nth-child(10) { animation-delay: 0.5s; }
-
-/* Effet de pulsation sur les éléments importants */
-.statblock-green,
-
-
-/* Scrollbar personnalisée */
-::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
-}
-
-::-webkit-scrollbar-track {
-    background: rgba(26, 15, 31, 0.6);
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #e879f9, #f0abfc, #fae8ff);
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(232, 121, 249, 0.5);
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #f0abfc, #fae8ff, #e879f9);
-    box-shadow: 0 0 25px rgba(232, 121, 249, 0.8);
-}
-
-/* Effet de lueur sur les éléments au focus */
-input:focus,
-textarea:focus,
-select:focus {
-    outline: none;
-    border-color: var(--color-font3);
-    box-shadow: 0 0 0 3px rgba(232, 121, 249, 0.3),
-                0 0 20px rgba(232, 121, 249, 0.2);
-}
-
-/* Particules décoratives montantes */
-body::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    background-image: 
-        radial-gradient(circle, rgba(167, 139, 250, 0.4) 2px, transparent 2px),
-        radial-gradient(circle, rgba(52, 211, 153, 0.3) 2px, transparent 2px),
-        radial-gradient(circle, rgba(251, 113, 133, 0.3) 1.5px, transparent 1.5px);
-    background-size: 80px 80px, 120px 120px, 60px 60px;
-    background-position: 0 0, 30px 30px, 50px 50px;
-    opacity: 0.15;
-    animation: particlesRise 30s linear infinite;
-}
-
-/* Effet de hover sur les lignes de tableau avec transition douce */
-#content .hoverable tr {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Cartes avec effet glassmorphism */
-.card-glass {
-    background: rgba(37, 24, 41, 0.7);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(232, 121, 249, 0.25);
-    border-radius: 15px;
-    padding: 1.5rem;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.card-glass:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 50px rgba(0, 0, 0, 0.6),
-                0 0 30px rgba(232, 121, 249, 0.3);
-    border-color: rgba(232, 121, 249, 0.5);
-}
-
-/* Loader animé */
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-.loader {
-    border: 4px solid rgba(232, 121, 249, 0.2);
-    border-top: 4px solid #e879f9;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    animation: spin 1s linear infinite;
-    box-shadow: 0 0 30px rgba(232, 121, 249, 0.5);
-}
-
-/* Texte avec effet gradient animé */
-.gradient-text {
-    background: linear-gradient(90deg, #e879f9, #f0abfc, #fae8ff, #e879f9);
-    background-size: 300% 100%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: shimmer 4s ease-in-out infinite;
-}
-
-/* Badges stylés */
+/* Badges */
 .badge {
     display: inline-block;
-    padding: 0.3rem 0.9rem;
-    border-radius: 15px;
-    font-size: 0.875rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.8px;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
-    transition: all 0.3s ease;
-}
-
-.badge:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+    letter-spacing: 0.05em;
 }
 
 .badge-success {
-    background: linear-gradient(135deg, #c084fc, #e9d5ff);
-    color: #1a0f1f;
+    background: #22c55e;
+    color: #ffffff;
 }
 
 .badge-info {
-    background: linear-gradient(135deg, #a78bfa, #d8b4fe);
-    color: #1a0f1f;
+    background: #14b8a6;
+    color: #ffffff;
 }
 
 .badge-warning {
-    background: linear-gradient(135deg, #fbbf24, #fde047);
-    color: #1a0f1f;
-}
-
+    background: #eab308;
+    color: #000000;
 .badge-danger {
-    background: linear-gradient(135deg, #f0abfc, #fae8ff);
-    color: #1a0f1f;
+    background: #f43f5e;
+    color: #ffffff;
+}
 }

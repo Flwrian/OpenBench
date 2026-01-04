@@ -1,7 +1,10 @@
+/* Container de pagination */
 .pagination {
-    display: inline-flex;
-    justify-content: center;
+    display: flex;
+    gap: 6px;
     align-items: center;
+    justify-content: center;
+    margin: 20px 0;
 }
 
 #pagebrowse {
@@ -11,46 +14,86 @@
 
 .pages {
     display: flex;
+    gap: 6px;
 }
 
-.page, .ellipsis {
-    display: inline-block;
-    padding: 6px 1rem;
-    margin: 0;
-    border-left: 1px solid var(--color1);
-    border-right: 1px solid var(--color1);
-    background-color: var(--color2); /* Dark background color */
-    color: var(--color-font2);
-    text-decoration: none;
+/* Boutons de page */
+.page, .page-button, .page-link, .ellipsis {
+    height: 36px;
+    min-width: 36px;
+    padding: 0 12px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    transition: background-color 0.2s; /* Add a smooth transition effect to background color */
-    height: 24px; /* This is just an example, adjust according to your needs */
-    line-height: 24px; /* Should be same as height */
-    min-width: 1.6rem;
-    text-align: center;
-    vertical-align: middle;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    line-height: 1;
 }
 
-.page:hover {
-    background-color: var(--color3); /* Darker background color on hover */
+/* Page active */
+.page.current, .page-button.active, .page-link.active {
+    background: var(--color-accent-primary);
+    color: #ffffff;
+    border-color: var(--color-accent-primary);
+    font-weight: 600;
+}
+
+/* Hover state */
+.page:hover:not(.current):not(.disabled),
+.page-button:hover:not(.active):not(.disabled),
+.page-link:hover:not(.active):not(.disabled) {
+    background: var(--color-bg-tertiary);
+    border-color: var(--color-accent-primary);
+    transform: translateY(-1px);
+}
+
+/* Disabled state */
+.page.disabled, .page-button.disabled, .page-link.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* Previous/Next buttons */
+.page.previous, .page.next, .page-prev, .page-next {
+    font-weight: 600;
 }
 
 .previous {
-    border-top-left-radius: 7px;
-    border-bottom-left-radius: 7px;
-}
-
-.current {
-    background-color: var(--color3);
+    border-radius: 6px;
 }
 
 .next {
-    border-top-right-radius: 7px;
-    border-bottom-right-radius: 7px;
+    border-radius: 6px;
 }
 
-.ellipsis, .fa-solid {
-    /*margin: 0 4px;*/
-    pointer-events: none; /* Disable click events on ellipsis */
-    vertical-align: middle; /* Ensure icons are vertically centered */
+.ellipsis {
+    pointer-events: none;
+    cursor: default;
+    border: none;
+    background: transparent;
+}
+
+.fa-solid {
+    vertical-align: middle;
+}
+
+/* Mobile (<768px) */
+@media (max-width: 768px) {
+    .pagination {
+        gap: 4px;
+    }
+    
+    .page, .page-button, .page-link, .ellipsis {
+        height: 32px;
+        min-width: 32px;
+        font-size: 12px;
+        padding: 0 8px;
+    }
 }
