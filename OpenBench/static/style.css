@@ -484,6 +484,56 @@ body, html, main{
     transform: translateY(-1px);
 }
 
+/* ========================================
+   TEST CARD BACKGROUNDS BY RESULT
+   ======================================== */
+
+/* Test card - Success (green) */
+.test-card-green {
+    background: linear-gradient(135deg, rgba(5, 150, 105, 0.15) 0%, rgba(16, 185, 129, 0.08) 100%) !important;
+    border: 1px solid rgba(16, 185, 129, 0.3) !important;
+}
+
+.test-card-green .test-card-accent {
+    background: linear-gradient(180deg, #10b981, #059669, #6ee7b7) !important;
+}
+
+/* Test card - Blue/Neutral (running) */
+.test-card-blue {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(94, 234, 212, 0.08) 100%) !important;
+    border: 1px solid rgba(94, 234, 212, 0.25) !important;
+}
+
+.test-card-blue .test-card-accent {
+    background: linear-gradient(180deg, #5eead4, #3b82f6, #ccfbf1) !important;
+}
+
+/* Test card - Yellow/Warning */
+.test-card-yellow {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(251, 191, 36, 0.08) 100%) !important;
+    border: 1px solid rgba(251, 191, 36, 0.3) !important;
+}
+
+.test-card-yellow .test-card-accent {
+    background: linear-gradient(180deg, #fbbf24, #f59e0b, #fde047) !important;
+}
+
+/* Test card - Red/Failure */
+.test-card-red {
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.15) 0%, rgba(239, 68, 68, 0.08) 100%) !important;
+    border: 1px solid rgba(239, 68, 68, 0.3) !important;
+}
+
+.test-card-red .test-card-accent {
+    background: linear-gradient(180deg, #ef4444, #dc2626, #fca5a5) !important;
+}
+
+/* Test card hover effect */
+.test-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
 /* Red link (liens d'erreur) */
 #content .redlink {
     color: #fb7185;
@@ -630,6 +680,38 @@ td pre {
     background: linear-gradient(90deg, rgba(94, 234, 212, 0.12), transparent);
 }
 
+
+/* ========================================
+   RESPONSIVE - TEST CARDS
+   ======================================== */
+@media (max-width: 1200px) {
+    .test-card > div {
+        grid-template-columns: auto 1fr !important;
+        gap: 15px !important;
+    }
+    
+    .test-card .statblock-mini {
+        grid-column: 1 / -1 !important;
+        max-width: 100% !important;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .test-card > div {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+    
+    .test-card > div > div {
+        min-width: 100% !important;
+    }
+    
+    .test-card .statblock-mini {
+        min-width: 100% !important;
+        max-width: 100% !important;
+    }
+}
 
 /* Styles for screen widths less than 768px */
 @media (max-width: 768px) {

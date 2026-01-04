@@ -1,14 +1,12 @@
 {% load mytags %}
 <td colspan="6" style="padding: 0;">
-    <div class="test-card" style="
-        background: linear-gradient(135deg, rgba(10, 25, 41, 0.6) 0%, rgba(15, 35, 50, 0.4) 100%);
+    <div class="test-card test-card-{{test|testResultColour}}" style="
         backdrop-filter: blur(10px);
         border-radius: 12px;
         margin: 8px 4px;
-        padding: 16px 20px;
-        border: 1px solid rgba(94, 234, 212, 0.15);
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        transition: none;
+        padding: 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
         cursor: pointer;
         position: relative;
         overflow: hidden;
@@ -16,38 +14,43 @@
     onclick="window.location='{{test|workload_url}}'">
         
         <!-- Gradient accent bar on left -->
-        <div style="
+        <div class="test-card-accent" style="
             position: absolute;
             left: 0;
             top: 0;
             bottom: 0;
-            width: 4px;
-            background: linear-gradient(180deg, #5eead4, #3b82f6, #ccfbf1);
+            width: 5px;
             border-radius: 12px 0 0 12px;
         "></div>
 
-        <!-- Main content -->
-        <div style="display: grid; grid-template-columns: auto 1fr auto auto; gap: 20px; align-items: center;">
+        <!-- Main content - Responsive Grid -->
+        <div style="
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 20px;
+            align-items: start;
+        ">
             
             <!-- Left section: Author & Engine -->
-            <div style="display: flex; flex-direction: column; gap: 8px; min-width: 140px;">
-                <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="display: flex; flex-direction: column; gap: 10px; min-width: 150px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
                     <div style="
-                        width: 32px;
-                        height: 32px;
+                        width: 40px;
+                        height: 40px;
                         background: linear-gradient(135deg, #5eead4, #3b82f6);
-                        border-radius: 8px;
+                        border-radius: 10px;
                         display: flex;
                         align-items: center;
                         justify-content: center;
                         font-weight: 700;
                         color: #0a1929;
-                        font-size: 0.95rem;
-                        box-shadow: 0 2px 8px rgba(94, 234, 212, 0.3);
+                        font-size: 1.1rem;
+                        box-shadow: 0 3px 10px rgba(94, 234, 212, 0.4);
+                        flex-shrink: 0;
                     ">
                         {{test.author|first|upper}}
                     </div>
-                    <div style="display: flex; flex-direction: column;">
+                    <div style="display: flex; flex-direction: column; min-width: 0;">
                         <a href="/user/{{test.author}}" style="
                             font-weight: 600;
                             font-size: 0.95rem;
@@ -75,8 +78,8 @@
             </div>
 
             <!-- Center section: Branches & Info -->
-            <div style="display: flex; flex-direction: column; gap: 10px; flex: 1;">
-                <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="display: flex; flex-direction: column; gap: 10px; flex: 1; min-width: 0;">
+                <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
                     <div style="
                         padding: 8px 14px;
                         background: rgba(10, 25, 41, 0.6);
@@ -86,19 +89,20 @@
                         align-items: center;
                         gap: 8px;
                         flex: 1;
+                        min-width: 200px;
                     ">
-                        <i class="fas fa-code-branch" style="color: #5eead4; font-size: 1rem;"></i>
+                        <i class="fas fa-code-branch" style="color: #5eead4; font-size: 1rem; flex-shrink: 0;"></i>
                         <a href="{{test|workload_url}}" style="
                             font-family: 'Courier New', monospace;
-                            font-size: 0.9rem;
+                            font-size: 0.85rem;
                             font-weight: 600;
                             color: #a5f3fc;
                             text-decoration: none;
-                            flex: 1;
                             overflow: hidden;
                             text-overflow: ellipsis;
                             white-space: nowrap;
-                            max-width: 300px;
+                            flex: 1;
+                            min-width: 0;
                         " onclick="event.stopPropagation();">{{test|git_diff_text}}</a>
                     </div>
                     <a href="{{test|gitDiffLink}}" style="
@@ -106,7 +110,7 @@
                         background: linear-gradient(135deg, rgba(94, 234, 212, 0.25), rgba(59, 130, 246, 0.2));
                         border: 1px solid rgba(94, 234, 212, 0.4);
                         border-radius: 8px;
-                        display: flex;
+                        display: inline-flex;
                         align-items: center;
                         gap: 6px;
                         text-decoration: none;
@@ -115,6 +119,7 @@
                         font-weight: 600;
                         transition: all 0.2s;
                         white-space: nowrap;
+                        flex-shrink: 0;
                     " onclick="event.stopPropagation();"
                     onmouseover="this.style.background='linear-gradient(135deg, rgba(94, 234, 212, 0.35), rgba(59, 130, 246, 0.3))'; this.style.transform='scale(1.05)';"
                     onmouseout="this.style.background='linear-gradient(135deg, rgba(94, 234, 212, 0.25), rgba(59, 130, 246, 0.2))'; this.style.transform='scale(1)';">
