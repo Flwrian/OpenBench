@@ -12,4 +12,99 @@
     {% if test|test_is_time_odds %} <span style="color: yellow; cursor: pointer" title="Time odds">*</span> {% endif %}
     {% if test|test_is_smp_odds %} <span style="color: orange; cursor: pointer" title="Thread odds">*</span> {% endif %}
 </td>
-<td class='statblock statblock-{{test|testResultColour}}'><strong>{{test|shortStatBlock|linebreaksbr}}</strong></td>
+<td class='statblock statblock-{{test|testResultColour}}' style="padding: 0;">
+    <div style="display: flex; flex-direction: column; gap: 6px; padding: 8px 12px;">
+        <div style="flex: 1;">
+            <strong>{{test|shortStatBlock|linebreaksbr}}</strong>
+        </div>
+        
+        <div class="wdl-bar-container" style="
+            width: 100%;
+            height: 6px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 3px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: row;
+            position: relative;
+        ">
+            {% with total=test.games %}
+            {% if total > 0 %}
+                {% with win_pct=test.wins|floatformat:0 draw_pct=test.draws|floatformat:0 loss_pct=test.losses|floatformat:0 %}
+                {% with win_width=test.wins|multiply:100|divide:total draw_width=test.draws|multiply:100|divide:total loss_width=test.losses|multiply:100|divide:total %}
+                
+                <div class="wdl-segment wdl-win" style="
+                    width: {{win_width}}%;
+                    background: #22c55e;
+                    transition: all 0.4s ease;
+                    animation: slideIn 0.6s ease-out;
+                " title="Wins: {{test.wins}} ({{win_width|floatformat:1}}%)"></div>
+                
+                <div class="wdl-segment wdl-draw" style="
+                    width: {{draw_width}}%;
+                    background: #64748b;
+                    transition: all 0.4s ease;
+                    animation: slideIn 0.6s ease-out 0.1s backwards;
+                " title="Draws: {{test.draws}} ({{draw_width|floatformat:1}}%)"></div>
+                
+                <div class="wdl-segment wdl-loss" style="
+                    width: {{loss_width}}%;
+                    background: #ef4444;
+                    transition: all 0.4s ease;
+                    animation: slideIn 0.6s ease-out 0.2s backwards;
+                " title="Losses: {{test.losses}} ({{loss_width|floatformat:1}}%)"></div>
+                
+                {% endwith %}
+                {% endwith %}
+            {% else %}
+                <div style="
+                    width: 100%;
+                    background: rgba(100, 116, 139, 0.3);
+                    animation: pulse 2s ease-in-out infinite;
+                "></div>
+            {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+</td>
+
+<style>
+@keyframes slideIn {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.4;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.wdl-segment {
+    position: relative;
+    height: 100%;
+}
+
+.wdl-segment:hover {
+    filter: brightness(1.15);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.wdl-bar-container {
+    transition: transform 0.2s ease;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.wdl-bar-container:hover {
+    transform: scaleY(1.3);
+}
+</style>

@@ -200,6 +200,18 @@ def machine_name(machine_id):
         return machine.info['machine_name']
     except: return 'None'
 
+def multiply(value, arg):
+    try:
+        return float(value) * float(arg)
+    except (ValueError, TypeError):
+        return 0
+
+def divide(value, arg):
+    try:
+        return float(value) / float(arg)
+    except (ValueError, TypeError, ZeroDivisionError):
+        return 0
+
 
 register = django.template.Library()
 register.filter('oneDigitPrecision', oneDigitPrecision)
@@ -218,6 +230,8 @@ register.filter('cpuflagsBlock', cpuflagsBlock)
 register.filter('compilerBlock', compilerBlock)
 register.filter('removePrefix', removePrefix)
 register.filter('machine_name', machine_name)
+register.filter('multiply', multiply)
+register.filter('divide', divide)
 
 ####
 
@@ -358,9 +372,19 @@ def git_diff_text(workload, N=24):
 
 
 def test_is_smp_odds(test):
-    dev_threads  = int(OpenBench.utils.extract_option(test.dev_options , 'Threads'))
-    base_threads = int(OpenBench.utils.extract_option(test.base_options, 'Threads'))
-    return dev_threads != base_threads
+    dev_threads_str  = OpenBench.utils.extract_option(test.dev_options , 'Threads')
+    base_threads_str = OpenBench.utils.extract_option(test.base_options, 'Threads')
+    
+    # Si l'une des deux options n'existe pas, on considère qu'il n'y a pas de thread odds
+    if dev_threads_str is None or base_threads_str is None:
+        return False
+    
+    try:
+        dev_threads  = int(dev_threads_str)
+        base_threads = int(base_threads_str)
+        return dev_threads != base_threads
+    except (ValueError, TypeError):
+        return False
 
 def test_is_time_odds(test):
     return test.dev_time_control != test.base_time_control
