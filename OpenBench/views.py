@@ -946,6 +946,45 @@ def api_pgns(request, pgn_id):
     response['Content-Disposition'] = 'attachment; filename=%d.pgn.tar' % (pgn_id)
     return response
 
+@csrf_exempt
+def api_live_stats(request):
+    """API endpoint pour récupérer les stats en temps réel des tests actifs"""
+    
+    # Récupère les IDs des tests depuis le query parameter
+    test_ids = request.GET.get('ids', '').split(',')
+    
+    if not test_ids or test_ids == ['']:
+        return JsonResponse({'error': 'No test IDs provided'}, status=400)
+    
+    try:
+        test_ids = [int(tid) for tid in test_ids if tid]
+    except ValueError:
+        return JsonResponse({'error': 'Invalid test ID format'}, status=400)
+    
+    # Récupère les tests
+    tests = Test.objects.filter(id__in=test_ids)
+    
+    # Construit la réponse avec les stats de chaque test
+    stats = {}
+    for test in tests:
+        stats[test.id] = {
+            'games': test.games,
+            'wins': test.wins,
+            'draws': test.draws,
+            'losses': test.losses,
+            'WW': test.WW,
+            'DW': test.DW,
+            'DD': test.DD,
+            'LD': test.LD,
+            'LL': test.LL,
+            'currentllr': float(test.currentllr) if test.test_mode == 'SPRT' else None,
+            'finished': test.finished,
+            'passed': test.passed,
+            'failed': test.failed,
+        }
+    
+    return JsonResponse({'stats': stats})
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #                                BUSINESS VIEWS                               #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

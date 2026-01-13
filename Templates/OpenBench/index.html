@@ -13,7 +13,7 @@
             {% if pending %}
                 <tr class="table-header"><th colspan='6'>Pending</th></tr>
                 {% for test in pending %}
-                    <tr>
+                    <tr data-test-id="{{test.id}}">
                         {% include "OpenBench/Blocks/testsummary.html" %}
                     </tr>
                 {% endfor %}
@@ -24,7 +24,7 @@
             {% if awaiting %}
                 <tr class="table-header"><th colspan='6'>Awaiting Artifacts</th></tr>
                 {% for test in awaiting %}
-                    <tr>
+                    <tr data-test-id="{{test.id}}">
                         {% include "OpenBench/Blocks/testsummary.html" %}
                     </tr>
                 {% endfor %}
@@ -44,7 +44,7 @@
                         {% endif %}
                     {% endwith %}
 
-                    <tr>
+                    <tr data-test-id="{{test.id}}">
                         {% include "OpenBench/Blocks/testsummary.html" %}
                     </tr>
                 {% endfor %}
