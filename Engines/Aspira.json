@@ -93,6 +93,7 @@
             "both_options"           : "Threads=1 Hash=16 Datagen=true UseNNUE=false",
             "both_time_control"      : "N=1000",
             "upload_pgns"            : "VERBOSE",
+            "workload_size"          : 50,
             "datagen_max_games"      : 200
         },
 

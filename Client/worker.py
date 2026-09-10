@@ -503,7 +503,7 @@ class MatchRunner:
 
     @staticmethod
     def pgnout_settings(config, timestamp, runner_idx):
-        return '-pgnout file=%s seldepth=true nodes=true' % (MatchRunner.pgn_name(config, timestamp, runner_idx))
+        return '-pgnout file=%s seldepth=true nodes=true match_line=pgncomment' % (MatchRunner.pgn_name(config, timestamp, runner_idx))
 
     @staticmethod
     def update_results(results, line):
