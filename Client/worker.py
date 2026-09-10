@@ -29,6 +29,7 @@ import psutil
 import queue
 import re
 import requests
+import shlex
 import shutil
 import subprocess
 import sys
@@ -403,20 +404,20 @@ class MatchRunner:
         is_frc    = 'FRC' in book_name or '960' in book_name or 'FISCHER' in book_name
         variant   = ['standard', 'fischerandom'][is_frc]
 
-        # Only include -repeat if not skipping the reverses in DATAGEN
-        is_datagen = config.workload['test']['type'] == 'DATAGEN'
-        no_reverse = is_datagen and not config.workload['test']['play_reverses']
-
         # Always include -recover, -variant, and -testEnv
-        return ['-repeat', ''][no_reverse] + ' -recover -variant %s -testEnv' % (variant)
+        return '-recover -variant %s -testEnv' % variant
 
     @staticmethod
     def concurrency_settings(config):
 
-        # Already computed for us by the Server
-        return '-concurrency %d -games %d' % (
+        is_datagen      = config.workload['test']['type'] == 'DATAGEN'
+        no_reverse      = is_datagen and not config.workload['test']['play_reverses']
+        games_per_round = 1 if no_reverse else 2
+
+        return '-concurrency %d -rounds %d -games %d' % (
             config.workload['distribution']['concurrency-per'],
             config.workload['distribution']['games-per-runner'],
+            games_per_round,
         )
 
     @staticmethod
@@ -503,7 +504,9 @@ class MatchRunner:
 
     @staticmethod
     def pgnout_settings(config, timestamp, runner_idx):
-        return '-pgnout file=%s seldepth=true nodes=true match_line=pgncomment' % (MatchRunner.pgn_name(config, timestamp, runner_idx))
+        match_line = '^info string pgncomment .*'
+        return '-pgnout file=%s seldepth=true nodes=true match_line=%s' % (
+            MatchRunner.pgn_name(config, timestamp, runner_idx), shlex.quote(match_line))
 
     @staticmethod
     def update_results(results, line):
