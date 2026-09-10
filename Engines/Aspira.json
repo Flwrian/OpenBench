@@ -1,7 +1,7 @@
 {
     "private" : false,
     "nps"     : 3500000,
-    "source"  : "https://github.com/Flwrian/JavaChessEngine",
+    "source"  : "https://github.com/Flwrian/Aspira",
 
     "build" : {
         "path"      : "",
