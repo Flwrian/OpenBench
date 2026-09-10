@@ -1265,7 +1265,7 @@ def build_runner_command(config, dev_cmd, base_cmd, scale_factor, timestamp, run
 def run_and_parse_runner(config, command, runner_idx, results_queue, abort_flag):
 
     print('\n[#%d] Launching match runner...\n%s\n' % (runner_idx, command))
-    runner = Popen(command.split(), stdout=PIPE)
+    runner = Popen(shlex.split(command), stdout=PIPE)
 
     results = {
 
