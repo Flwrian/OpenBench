@@ -1,7 +1,7 @@
 {
     "private" : false,
-    "nps"     : 200000,
-    "source"  : "https://github.com/Flwrian/Aspira",
+    "nps"     : 3500000,
+    "source"  : "https://github.com/Flwrian/JavaChessEngine",
 
     "build" : {
         "path"      : "",
@@ -76,14 +76,38 @@
     "datagen_presets" : {
 
         "default" : {
-            "win_adj"       : "None",
-            "draw_adj"      : "None",
-            "workload_size" : 128
+            "both_branch"            : "codex/nnue-v1-test",
+            "both_options"           : "Threads=1 Hash=16 Datagen=true UseNNUE=false",
+            "both_time_control"      : "N=1000",
+            "book_name"              : "NONE",
+            "upload_pgns"            : "VERBOSE",
+            "win_adj"                : "None",
+            "draw_adj"               : "None",
+            "workload_size"          : 32,
+            "datagen_custom_genfens" : "plies=10 jitter=2 window=150 maxeval=1200",
+            "datagen_play_reverses"  : "NO",
+            "datagen_max_games"      : 200
         },
 
-        "40k Nodes" : {
-            "both_options"      : "Threads=1 Hash=16",
-            "both_time_control" : "N=40000"
+        "NNUE v1 Smoke" : {
+            "both_options"           : "Threads=1 Hash=16 Datagen=true UseNNUE=false",
+            "both_time_control"      : "N=1000",
+            "upload_pgns"            : "VERBOSE",
+            "datagen_max_games"      : 200
+        },
+
+        "NNUE v1 Pilot" : {
+            "both_options"           : "Threads=1 Hash=32 Datagen=true UseNNUE=false",
+            "both_time_control"      : "N=5000",
+            "upload_pgns"            : "VERBOSE",
+            "datagen_max_games"      : 2000
+        },
+
+        "NNUE v1 50k" : {
+            "both_options"           : "Threads=1 Hash=32 Datagen=true UseNNUE=false",
+            "both_time_control"      : "N=10000",
+            "upload_pgns"            : "COMPACT",
+            "datagen_max_games"      : 50000
         }
     }
 }
