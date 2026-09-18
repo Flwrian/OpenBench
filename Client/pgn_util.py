@@ -25,8 +25,8 @@ import sys
 ## Local imports must only use "import x", never "from x import ..."
 
 # For use externally
-REGEX_COMMENT_VERBOSE  = r'(book|[+-]?M?\d+(?:\.\d+)?/\d+ [\d.]+s, n=\d+, sd=\d+)'
-REGEX_COMMENT_COMPACT  = r'(book|[+-]?M?\d+(?:\.\d+)?)/\d+'
+REGEX_COMMENT_VERBOSE  = r'(book|[+-]?M?\d+(?:\.\d+)?/\d+ [\d.]+s, n=\d+, sd=\d+(?:, line=[^}]*)?)'
+REGEX_COMMENT_COMPACT  = r'(book|[+-]?M?\d+(?:\.\d+)?/\d+(?:, line=[^}]*)?)'
 REGEX_MOVE_AND_COMMENT = r'\s*(?:\d+\. )?([a-zA-Z0-9+=#*-]+) (?:\s*\{\s*([^}]*)\s*\})?'
 REGEX_GAME_RESULT      = r'\s*(1-0|0-1|1/2-1/2|\*)'
 
@@ -68,19 +68,41 @@ def pgn_strip_headers(headers, compact):
 
 def pgn_strip_movelist(move_text, compact):
 
-    # May parse book, otherwise Score for Compact, Score Depth/SelDepth Time Nodes for Verbose
-    comment_regex = re.compile(REGEX_COMMENT_COMPACT if compact else REGEX_COMMENT_VERBOSE)
-
     # Parses the move number, the SAN, and an optional comment
     one_ply_regex = re.compile(r'\s*(?:\d+\. )?([a-zA-Z0-9+=#*-]+) (?:\s*\{\s*([^}]*)\s*\})?')
 
     # Captures the trailing game result
     result_regex  = re.compile(r'\s*(1-0|0-1|1/2-1/2|\*)')
 
+    def extract_pgncomment(comment):
+        match = re.search(r'line="([^"]*)"', comment)
+        prefix = 'info string pgncomment '
+        if match and match.group(1).startswith(prefix):
+            return match.group(1)[len(prefix):]
+        return None
+
+    def format_comment(comment):
+        if not comment or comment.strip() == 'book':
+            return comment.strip() if comment else 'unknown'
+
+        score_depth = re.search(r'([+-]?M?\d+(?:\.\d+)?/\d+)', comment)
+        pgncomment = extract_pgncomment(comment)
+
+        if compact:
+            formatted = score_depth.group(1) if score_depth else 'unknown'
+        else:
+            time     = re.search(r'([\d.]+s)', comment)
+            nodes    = re.search(r'n=(\d+)', comment)
+            seldepth = re.search(r'sd=(\d+)', comment)
+            formatted = '%s %s, n=%s, sd=%s' % (
+                score_depth.group(1), time.group(1), nodes.group(1), seldepth.group(1)
+            ) if score_depth and time and nodes and seldepth else 'unknown'
+
+        return '%s, line=%s' % (formatted, pgncomment) if pgncomment else formatted
+
     stripped = '' # Add each: <Move> {<Comment>}
-    for move, comment in re.compile(REGEX_MOVE_AND_COMMENT).findall(move_text):
-        match = re.search(comment_regex, comment)
-        stripped += '%s {%s} ' % (move, match.group() if match else 'unknown')
+    for move, comment in one_ply_regex.findall(move_text):
+        stripped += '%s {%s} ' % (move, format_comment(comment))
 
     # PGNs expect trailing game result text
     return stripped + re.compile(REGEX_GAME_RESULT).search(move_text).group(1)

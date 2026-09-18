@@ -24,3 +24,9 @@ if __name__ == '__main__':
         for headers, move_list in pgn_iterator(example_pgn):
             for compact in [ True, False ]:
                 verify_stripped_move_list(pgn_strip_movelist(move_list, compact), compact)
+
+    comment = ('1. e4 {+0.25/12 0.010s, n=5000, sd=14, '
+               'line="info string pgncomment aspira-v1 score_white=25 depth=12"} 1-0')
+    for compact in [ True, False ]:
+        stripped = pgn_strip_movelist(comment, compact)
+        assert 'line=aspira-v1 score_white=25 depth=12' in stripped
